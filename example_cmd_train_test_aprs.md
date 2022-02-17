@@ -1,6 +1,7 @@
 # Training and Testing APRs
 
 ## PoseNet + EfficientNet
+Note: change "backbone_type" to "efficientnet" in the config file (under "posenet")
 ### Train
 ```
 main.py posenet train models/backbones/efficient-net-b0.pth
@@ -22,6 +23,7 @@ posenet_effnet_apr_kings_college.pth
 ```
 
 ## PoseNet + ResNet50
+Note: change "backbone_type" to "resnet50" in the config file (under "posenet")
 ### Train
 ```
 main.py posenet train resnet50_pretrained.pth
