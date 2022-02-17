@@ -1,4 +1,4 @@
-# Training and Testing single scene APRs
+# Training and Testing APRs
 
 ## PoseNet + EfficientNet
 ### Train
