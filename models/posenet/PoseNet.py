@@ -27,14 +27,16 @@ class PoseNet(nn.Module):
         elif backbone_type == "mobilenet":
             backbone = torchvision.models.mobilenet_v2(pretrained=False)
             backbone.load_state_dict(torch.load(backbone_path, map_location="cpu"))
-            self.backbone = nn.Sequential(*list(backbone.modules())[:-2])
-            backbone_dim = 2048
+            self.backbone = nn.Sequential(*list(backbone.children())[:-1])
+            backbone_dim = 1280
 
         elif backbone_type == "efficientnet":
             # Efficient net
             self.backbone = torch.load(backbone_path)
             backbone_dim = 1280
             self.standard_forward = True
+        else:
+            raise NotImplementedError("backbone type: {} not supported".format(backbone_type))
 
         self.latent_dim = config.get("hidden_dim") # 256
         self.backbone_type = backbone_type
