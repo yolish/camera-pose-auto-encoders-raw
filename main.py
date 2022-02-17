@@ -196,8 +196,6 @@ if __name__ == "__main__":
         utils.plot_loss_func(sample_count, loss_vals, loss_fig_path)
 
     else: # Test
-        dump = True
-        dump_path = "out/ms-transformer_descs/"
 
         # Set to eval mode
         model.eval()
@@ -226,11 +224,6 @@ if __name__ == "__main__":
                 res = model(minibatch)
                 est_pose = res.get('pose')
                 toc = time.time()
-
-                if dump:
-                    prefix_path = dump_path + dataset.scenes[i] + "_img_{}_".format(i) + os.path.basename(dataset.img_paths[i]) + "_"
-                    torch.save(res.get("latent_x"), prefix_path + "latent_x.pth")
-                    torch.save(res.get("latent_q"), prefix_path + "latent_q.pth")
 
                 # Evaluate error
                 posit_err, orient_err = utils.pose_err(est_pose, gt_pose)
