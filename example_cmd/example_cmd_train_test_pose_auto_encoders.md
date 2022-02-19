@@ -39,7 +39,8 @@ CambridgeLandmarks_config.json
 ems_transposenet_cambridge_pretrained_finetuned.pth
 ```
 ### Train (7Scenes)
-```main_learn_multiscene_pose_encoding.py
+```
+main_learn_multiscene_pose_encoding.py
 ems-transposenet
 train
 models/backbones/efficient-net-b0.pth
@@ -47,6 +48,7 @@ models/backbones/efficient-net-b0.pth
 datasets/7Scenes/7scenes_all_scenes.csv
 7Scenes_config.json 
 ems_transposenet_7scenes_pretrained.pth
+```
 
 ### Test - Example on Cambridge: Kings College
 ```
