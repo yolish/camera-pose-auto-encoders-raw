@@ -1,6 +1,6 @@
 # Test-time optimization of position estimation with pose encoding
 
-## Optimization of position for MS-Transformer with a camera pose encoding
+## Optimization of position for MS-Transformer with a camera pose encoding (Shop Facade scene)
 ```
 main_refine_apr_test_time.py
 ems-transposenet
