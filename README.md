@@ -43,12 +43,12 @@ See ```example_cmd\example_cmd_reconstruct_img.md``` for example command lines.
 
 ### Pre-trained models
 You can download pretrained models in order to easily reproduce our results 
-| Model | Description | 
+| Model (Linked) | Description | 
 --- | ---
 | APR models ||
-PoseNet+MobileNet | Single-scene APR, KingsCollege scene|
-PoseNet+ResNet50 | Single-scene APR, KingsCollege scene|
-PoseNet+EfficientB0 | Single-scene APR, KingsCollege scene|
+[PoseNet+MobileNet](https://drive.google.com/file/d/1YMbWCCnu1pQI-ni4v0y_Lo8EpFumwqHI/view?usp=sharing) | Single-scene APR, KingsCollege scene|
+[PoseNet+ResNet50](https://drive.google.com/file/d/1afA97MG5tGfFLBTwaAbauT2-H0tFJxaj/view?usp=sharing}) | Single-scene APR, KingsCollege scene|
+[PoseNet+EfficientB0](https://drive.google.com/file/d/1FdaAFfDtN-XxWl3Ek281Ca_wlerqnBOF/view?usp=sharing) | Single-scene APR, KingsCollege scene|
 MS-Transformer | Multi-scene APR, CambridgeLandmarks dataset|
 MS-Transformer | Multi-scene APR, 7Scenes dataset|
 | Camera Pose Auto-Encoders||
