@@ -107,3 +107,9 @@ test_transforms = {
 
 
 
+def get_base_transform(img_size):
+    resize = int(img_size * 1.14)
+    return transforms.Compose([transforms.ToPILImage(),
+                                    transforms.Resize(resize),
+                                    transforms.CenterCrop(img_size),
+                                    transforms.ToTensor()])
