@@ -43,6 +43,25 @@ See ```example_cmd\example_cmd_reconstruct_img.md``` for example command lines.
 
 ### Pre-trained models
 You can download pretrained models in order to easily reproduce our results 
+| Model | Description | 
+--- | ---
+| APR models ||
+PoseNet+MobileNet | Single-scene APR, KingsCollege scene|
+PoseNet+ResNet50 | Single-scene APR, KingsCollege scene|
+PoseNet+EfficientB0 | Single-scene APR, KingsCollege scene|
+MS-Transformer | Multi-scene APR, CambridgeLandmarks dataset|
+MS-Transformer | Multi-scene APR, 7Scenes dataset|
+| Camera Pose Auto-Encoders||
+Auto-Encoder for PoseNet+MobileNet | Auto-Encoder for a single-scene APR, KingsCollege scene|
+Auto-Encoder for PoseNet+ResNet50 | Auto-Encoder for a single-scene APR, KingsCollege scene|
+Auto-Encoder for PoseNet+EfficientB0 | Auto-Encoder for a single-scene APR, KingsCollege scene|
+Auto-Encoder for Auto-Encoder for MS-Transformer | Auto-Encoder for a multi-scene APR, CambridgeLandmarks dataset|
+Auto-Encoder for MS-Transformer | Auto-Encoder for a multi-scene APR, 7Scenes dataset|
+| Decoders for Image Reconstruction | |
+Decoder for MS-Transformer | Decoder trained for reconstructing images from the Shop Facade scene |
+
+
+
 
 
 
