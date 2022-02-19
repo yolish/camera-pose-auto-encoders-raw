@@ -31,7 +31,11 @@
         "reduction": ["reduction_4", "reduction_3"],
 		"freeze": false,
 		"freeze_exclude_phrase": ["regressor_head_t", "transformer_t"],
-		"no_augment": true
+		"no_augment": true,
+		"num_neighbors": 3,
+		"single_scene": false,
+		"shallow_mlp": false,
+		"apply_positional_encoding": true
 	},
 	"posenet": {
 		"batch_size": 32,
@@ -47,7 +51,7 @@
 		"n_epochs": 300,
 		"shallow_mlp": false,
 		"apply_positional_encoding": true,
-		"backbone_type": "resnet50",
+		"backbone_type": "mobilenet",
 		"hidden_dim": 256
 	}
 

@@ -1,8 +1,7 @@
-# Training and Testing Pose Auto Encoders
+#Training and Testing Pose Auto Encoders
 
 ## Auto Encoder for PoseNet + EfficientNet (Single Scene)
 ### Train
-Note: change "backbone_type" to "efficientnet" in the config file (under "posenet")
 ```
 main_learn_pose_encoding.py
 posenet
