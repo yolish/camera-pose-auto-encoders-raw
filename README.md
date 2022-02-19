@@ -52,13 +52,13 @@ You can download pretrained models in order to easily reproduce our results
 MS-Transformer | Multi-scene APR, CambridgeLandmarks dataset|
 MS-Transformer | Multi-scene APR, 7Scenes dataset|
 | Camera Pose Auto-Encoders||
-Auto-Encoder for PoseNet+MobileNet | Auto-Encoder for a single-scene APR, KingsCollege scene|
-Auto-Encoder for PoseNet+ResNet50 | Auto-Encoder for a single-scene APR, KingsCollege scene|
-Auto-Encoder for PoseNet+EfficientB0 | Auto-Encoder for a single-scene APR, KingsCollege scene|
-Auto-Encoder for Auto-Encoder for MS-Transformer | Auto-Encoder for a multi-scene APR, CambridgeLandmarks dataset|
-Auto-Encoder for MS-Transformer | Auto-Encoder for a multi-scene APR, 7Scenes dataset|
+[Auto-Encoder for PoseNet+MobileNet](https://drive.google.com/file/d/1EhGmMMCOlFK3lirYlintw0DEJtRGr3eR/view?usp=sharing) | Auto-Encoder for a single-scene APR, KingsCollege scene|
+[Auto-Encoder for PoseNet+ResNet50](https://drive.google.com/file/d/1nZolEHF_TKDHpBEw7YQhxH4w61HL0oGD/view?usp=sharing) | Auto-Encoder for a single-scene APR, KingsCollege scene|
+[Auto-Encoder for PoseNet+EfficientB0](https://drive.google.com/file/d/1zvHBt5bGB2v59_ONWwLmh8NNUNVdh03T/view?usp=sharing) | Auto-Encoder for a single-scene APR, KingsCollege scene|
+[Auto-Encoder for Auto-Encoder for MS-Transformer](https://drive.google.com/file/d/1rshdruRQcZYMIRI9lTY_U981cJsohauI/view?usp=sharing) | Auto-Encoder for a multi-scene APR, CambridgeLandmarks dataset|
+[Auto-Encoder for MS-Transformer](https://drive.google.com/file/d/1hGcII8D0G24DBGXh3aLohCubAmfN9Rc7/view?usp=sharing) | Auto-Encoder for a multi-scene APR, 7Scenes dataset|
 | Decoders for Image Reconstruction | |
-Decoder for MS-Transformer | Decoder trained for reconstructing images from the Shop Facade scene |
+[Decoder for MS-Transformer](https://drive.google.com/file/d/1okm_sN_JXrSD2bpTHBYDghl99pIj87YX/view?usp=sharing) | Decoder trained for reconstructing images from the Shop Facade scene |
 
 
 
