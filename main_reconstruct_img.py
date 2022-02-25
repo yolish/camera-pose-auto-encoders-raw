@@ -107,7 +107,7 @@ if __name__ == "__main__":
         decoder.train()
 
         # Set the losses
-        mse_loss = torch.nn.L1Loss().to(device)
+        l1_loss = torch.nn.L1Loss().to(device)
 
         # Set the optimizer and scheduler
         optim = torch.optim.Adam(decoder.parameters(),
@@ -161,7 +161,7 @@ if __name__ == "__main__":
 
                 rec_img = decoder(torch.cat((latent_x, latent_q), dim=1))
 
-                criterion = mse_loss(rec_img, img)
+                criterion = l1_loss(rec_img, img)
 
                 # Collect for recoding and plotting
                 running_loss += criterion.item()
