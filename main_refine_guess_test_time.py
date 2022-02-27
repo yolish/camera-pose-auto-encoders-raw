@@ -133,7 +133,9 @@ if __name__ == "__main__":
                      'num_workers': config.get('n_workers')}
     dataloader = torch.utils.data.DataLoader(dataset, **loader_params)
 
+    stats_init = np.zeros((len(dataloader.dataset), 3))
     stats = np.zeros((len(dataloader.dataset), 3))
+    stats_average = np.zeros((len(dataloader.dataset), 3))
 
 
     for i, minibatch in enumerate(dataloader, 0):
@@ -144,13 +146,13 @@ if __name__ == "__main__":
 
         gt_pose = minibatch.get('pose').to(dtype=torch.float32)
 
+        est_pose = gt_pose * 1.0
+        est_pose[:, :3] = est_pose[:, :3] + torch.randn((1,3)).to(device).to(est_pose.dtype)
+
         # Forward pass to predict the pose
         with torch.no_grad():
             res = apr(minibatch)
-            est_pose = res.get('pose')
-            tic = time.time()
-            latent_x = res.get("latent_x")
-            latent_q = res.get("latent_q")
+            # use only to get the scene
             if not is_single_scene:
                 scene_dist = res.get('scene_log_distr')
                 scene = torch.argmax(scene_dist, dim=1).to(dtype=torch.float32).unsqueeze(1).repeat(1,
@@ -161,13 +163,19 @@ if __name__ == "__main__":
             ref_pose = get_ref_pose(est_pose.cpu().numpy(), dataset.poses, 0, num_neighbors)
 
             ref_pose = torch.Tensor(ref_pose).to(device).reshape(1 * num_neighbors, 7)
+
+            if is_single_scene:
+                latent_x, latent_q = pose_encoder(ref_pose)
+            else:
+                latent_x, latent_q = pose_encoder(ref_pose, scene)
+
             if is_single_scene:
                 ref_latent_x, ref_latent_q = pose_encoder(ref_pose)
             else:
                 ref_latent_x, ref_latent_q = pose_encoder(ref_pose, scene)
 
 
-
+        tic = time.time()
         query_latent = torch.cat((latent_x, latent_q), dim=1)
         ref_latent = torch.cat((ref_latent_x, ref_latent_q), dim=1)
         pose_optim.train()
@@ -184,23 +192,37 @@ if __name__ == "__main__":
         pose_optim.eval()
         with torch.no_grad():
             refined_est_pose = torch.sum(weights * ref_pose, dim=0).unsqueeze(0)
-            refined_est_pose[:, 3:] = est_pose[:, 3:] # use apr estimation for orientation
+            avg_est_pose = torch.mean(ref_pose, dim=0).unsqueeze(0)
 
         toc = time.time()
+        posit_err_init, orient_err_init = utils.pose_err(est_pose, gt_pose)
         posit_err, orient_err = utils.pose_err(refined_est_pose, gt_pose)
+        posit_err_avg, orient_err_avg = utils.pose_err(avg_est_pose, gt_pose)
         pose_optim.reset_params()
 
         # Collect statistics
+        stats_init[i, 0] = posit_err_init.item()
+        stats_init[i, 1] = orient_err_init.item()
+        stats_init[i, 2] = 0.0
+
         stats[i, 0] = posit_err.item()
         stats[i, 1] = orient_err.item()
-        stats[i, 2] = (toc - tic)*1000
+        stats[i, 2] = (toc - tic) * 1000
+
+        stats_average[i, 0] = posit_err_avg.item()
+        stats_average[i, 1] = orient_err_avg.item()
+        stats_average[i, 2] = 0.0
 
         logging.info("Pose error: {:.3f}[m], {:.3f}[deg], inferred in {:.2f}[ms]".format(
             stats[i, 0],  stats[i, 1],  stats[i, 2]))
 
     # Record overall statistics
     logging.info("Performance of {} on {}".format(args.checkpoint_path, args.labels_file))
-    logging.info("Median pose error: {:.3f}[m], {:.3f}[deg]".format(np.nanmedian(stats[:, 0]), np.nanmedian(stats[:, 1])))
+    logging.info("Median pose error - init : {:.3f}[m], {:.3f}[deg]".format(np.nanmedian(stats_init[:, 0]), np.nanmedian(stats_init[:, 1])))
+    logging.info("Median pose error - refined : {:.3f}[m], {:.3f}[deg]".format(np.nanmedian(stats[:, 0]),
+                                                                            np.nanmedian(stats[:, 1])))
+    logging.info("Median pose error - average: {:.3f}[m], {:.3f}[deg]".format(np.nanmedian(stats_average[:, 0]),
+                                                                            np.nanmedian(stats_average[:, 1])))
     logging.info("Mean inference time:{:.2f}[ms]".format(np.mean(stats[:, 2])))
 
 

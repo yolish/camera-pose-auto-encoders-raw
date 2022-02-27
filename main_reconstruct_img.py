@@ -177,7 +177,6 @@ if __name__ == "__main__":
                     logging.info("[Batch-{}/Epoch-{}] running MSE loss: {:.3f}".format(
                                                                         batch_idx+1, epoch+1, (running_loss/n_samples)))
                     if debug_display:
-                        img_size = 224
                         rec_np_img = rec_img.detach().cpu()[0].squeeze(0).permute((1,2,0)).numpy() * 255.0
                         plt.imshow(rec_np_img.astype(np.int32))
                         plt.show()
@@ -203,7 +202,8 @@ if __name__ == "__main__":
 
         # Set the dataset and data loader
         dataset = CameraPoseDataset(args.dataset_path, args.labels_file, transform)
-        indices = [3]
+        #indices = [10,200] # heads
+        indices = [1, 6]  # shop facade
         with torch.no_grad():
             for i in indices:
                 sample = dataset[i]
@@ -216,19 +216,18 @@ if __name__ == "__main__":
                 else:
                     latent_x, latent_q = pose_encoder(pose)
 
-            rec_img = decoder(torch.cat((latent_x, latent_q), dim=1))
-            # plot here img vs rec_img
+                rec_img = decoder(torch.cat((latent_x, latent_q), dim=1))
+                # plot here img vs rec_img
 
+                rec_np_img = rec_img.cpu()[0].squeeze(0).permute((1, 2, 0)).numpy() * 255.0
+                plt.imshow(rec_np_img.astype(np.int32))
+                #plt.show()
+                plt.savefig("{}_recon.png".format(i))
 
-
-            rec_np_img = rec_img.cpu()[0].squeeze(0).permute((1, 2, 0)).numpy() * 255.0
-            plt.imshow(rec_np_img.astype(np.int32))
-            plt.show()
-
-            np_img = img.permute((1, 2, 0)).numpy() * 255.0
-            plt.imshow(np_img.astype(np.int32))
-            plt.show()
-
+                np_img = img.permute((1, 2, 0)).numpy() * 255.0
+                plt.imshow(np_img.astype(np.int32))
+                #plt.show()
+                plt.savefig("{}_orig.png".format(i))
 
 
 
