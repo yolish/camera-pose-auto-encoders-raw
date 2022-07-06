@@ -230,11 +230,6 @@ if __name__ == "__main__":
             else:
                 raise NotImplementedError("Specified orientation refinement is not supported")
 
-
-
-
-
-
         toc = time.time()
         posit_err, orient_err = utils.pose_err(refined_est_pose, gt_pose)
         pose_optim.reset_params()
