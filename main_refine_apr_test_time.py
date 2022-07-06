@@ -51,6 +51,36 @@ def get_ref_pose(query_poses, db_poses, start_index, k):
         ref_poses[i, 0:k, :] = db_poses[sorted[start_index:(k+start_index)]]
     return ref_poses
 
+
+def weighted_avg_quaterions(Q, w):
+    # Implementation copied from https://github.com/christophhagen/averaging-quaternions/blob/master/averageQuaternions.py
+    # Q is a Nx4 numpy matrix and contains the quaternions to average in the rows.
+    # The quaternions are arranged as (w,x,y,z), with w being the scalar
+    # The result will be the average quaternion of the input. Note that the signs
+    # of the output quaternion can be reversed, since q and -q describe the same orientation
+    # Number of quaternions to average
+    M = Q.shape[0]
+    A = np.zeros((4,4))
+    weightSum = 0
+
+    for i in range(0,M):
+        q = Q[i,:]
+        A = w[i] * np.outer(q,q) + A
+        weightSum += w[i]
+
+    # scale
+    A = (1.0/weightSum) * A
+
+    # compute eigenvalues and -vectors
+    eigenValues, eigenVectors = np.linalg.eig(A)
+
+    # Sort by largest eigenvalue
+    eigenVectors = eigenVectors[:,eigenValues.argsort()[::-1]]
+
+    # return the real part of the largest eigenvector (has only real part)
+    return np.real(eigenVectors[:,0])
+
+
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("model_name",
@@ -114,6 +144,7 @@ if __name__ == "__main__":
 
     # Test time optimization
     num_neighbors = int(config.get("num_neighbors"))
+    refine_orientation = config.get("refine_orientation")
 
     pose_optim = PoseOptim(num_neighbors, config.get("hidden_dim")).to(device)
     # Set the losses
@@ -184,7 +215,25 @@ if __name__ == "__main__":
         pose_optim.eval()
         with torch.no_grad():
             refined_est_pose = torch.sum(weights * ref_pose, dim=0).unsqueeze(0)
-            refined_est_pose[:, 3:] = est_pose[:, 3:] # use apr estimation for orientation
+            if refine_orientation is None: # use apr estimation for orientation - default for our paper
+                refined_est_pose[:, 3:] = est_pose[:, 3:]
+            elif refine_orientation == "affine":
+                refined_est_pose[:, 3:] = refined_est_pose[:, 3:] / torch.norm(refined_est_pose[:, 3:])
+            elif refine_orientation == "eigen":
+                refined_est_pose[:, 3:] = torch.from_numpy(weighted_avg_quaterions(ref_pose[:, 3:].cpu().numpy(), weights.cpu().numpy())).to(device)
+                refined_est_pose[:, 3:] = refined_est_pose[:, 3:] / torch.norm(refined_est_pose[:, 3:])
+                refined_est_pose[:, 3:] = ref_pose[torch.argmax(weights, dim=0)[0]][3:]
+            elif refine_orientation == "closest":
+                refined_est_pose[:, 3:] = ref_pose[0, 3:]
+            elif refine_orientation == "max":
+                refined_est_pose[:, 3:] = ref_pose[torch.argmax(weights, dim=0)[0], 3:]
+            else:
+                raise NotImplementedError("Specified orientation refinement is not supported")
+
+
+
+
+
 
         toc = time.time()
         posit_err, orient_err = utils.pose_err(refined_est_pose, gt_pose)
