@@ -37,7 +37,8 @@
 		"apply_positional_encoding": true,
 		"num_neighbors": 3,
 		"test_optim_iterations": 3,
-		"img_size": 64
+		"img_size": 64,
+		"refine_orientation": null
 	},
 	"posenet": {
 		"batch_size": 32,
@@ -55,7 +56,7 @@
 		"n_epochs": 300,
 		"shallow_mlp": false,
 		"apply_positional_encoding": true,
-		"backbone_type": "efficientnet",
+		"backbone_type": "mobilenet",
 		"hidden_dim": 256,
 		"test_optim_iterations": 3,
 		"num_neighbors": 3,
