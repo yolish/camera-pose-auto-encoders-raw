@@ -24,20 +24,23 @@ Note: All experiments reported in our paper were performed with an 8GB 1080 NVID
 
 ### Usage
 #### Training and testing single- and multi-scene APRs
-The entry point for training and testing APRs is the ```main.py``` script in the root directory
+The entry point for training and testing APRs is the ```main.py``` script in the root directory.
+
 See ```example_cmd/example_cmd_train_test_aprs.md``` for example command lines.
 
 #### Training and testing Camera Pose Auto-Encoders
-The entry point for training and testing camera pose auto-encoders are the ```main_learn_pose_encoding.py``` and ```main_learn_multiscene_pose_encoding.py.py``` scripts in the root directory
-corresponding to auto-encoders for single and multi-scene APRs. 
+The entry point for training and testing camera pose auto-encoders are the ```main_learn_pose_encoding.py``` and ```main_learn_multiscene_pose_encoding.py``` scripts in the root directory, corresponding to auto-encoders for single and multi-scene APRs. 
+
 See example_cmd\example_cmd_train_test_pose_auto_encoders.md for example command lines.
 
 #### Test-time optimization for position regression with camera pose encoding
 The entry point for test time optimization is the ```main_refine_apr_test_time.py``` script.
+
 See ```example_cmd\example_cmd_test_time_optim.md``` for example command lines.
 
 #### Image reconstructiom from camera pose encoding
 The entry training and testing an image decoder to reconstruct images from camera pose encoding, is the ```main_reconstruct_img.py``` script.
+
 See ```example_cmd\example_cmd_reconstruct_img.md``` for example command lines.
 
 
