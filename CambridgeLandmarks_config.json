@@ -7,7 +7,7 @@
 	},
 	"ems-transposenet":
 	{
-		"batch_size": 8,
+		"batch_size": 32,
         "equalize_scenes": true,
 		"num_scenes": 4,
 		"learnable": true,
@@ -32,13 +32,17 @@
 		"freeze": false,
 		"freeze_exclude_phrase": ["regressor_head_t", "transformer_t"],
 		"no_augment": true,
-		"num_neighbors": 3,
 		"single_scene": false,
 		"shallow_mlp": false,
-		"apply_positional_encoding": true
+		"apply_positional_encoding": true,
+		"num_neighbors": 3,
+		"test_optim_iterations": 3,
+		"img_size": 64
 	},
 	"posenet": {
 		"batch_size": 32,
+		"single_scene": true,
+		"num_neighbors": 3,
 		"learnable": true,
 		"s_x": -3.0,
 		"s_q": -6.5,
@@ -51,9 +55,11 @@
 		"n_epochs": 300,
 		"shallow_mlp": false,
 		"apply_positional_encoding": true,
-		"backbone_type": "mobilenet",
-		"hidden_dim": 256
+		"backbone_type": "efficientnet",
+		"hidden_dim": 256,
+		"test_optim_iterations": 3,
+		"num_neighbors": 3,
+		"single_scene": true
 	}
 
 }
-

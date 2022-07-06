@@ -8,7 +8,7 @@ This code implements:
 1. Training and testing of single and multi-scene APRs: PoseNet with different backbones and MS-Transformer. MS-Transformer and its training/testing (1) was cloned from: https://github.com/yolish/multi-scene-pose-transformer
 2. Training and testing of pose auto-encoders
 3. Test-time optimization for position regression with camera pose encoding
-4. Image reconstructiom from camera pose encoding
+4. Image reconstruction from camera pose encoding
 
 ### Prerequisites
 
@@ -30,7 +30,7 @@ See ```example_cmd/example_cmd_train_test_aprs.md``` for example command lines.
 #### Training and testing Camera Pose Auto-Encoders
 The entry point for training and testing camera pose auto-encoders are the ```main_learn_pose_encoding.py``` and ```main_learn_multiscene_pose_encoding.py.py``` scripts in the root directory
 corresponding to auto-encoders for single and multi-scene APRs. 
-See examle_cmd\example_cmd_train_test_pose_auto_encoders.md for example command lines.
+See example_cmd\example_cmd_train_test_pose_auto_encoders.md for example command lines.
 
 #### Test-time optimization for position regression with camera pose encoding
 The entry point for test time optimization is the ```main_refine_apr_test_time.py``` script.
