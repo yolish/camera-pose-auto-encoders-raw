@@ -1,5 +1,5 @@
-## Camera Pose Auto-Encoders
-Official PyTorch implementation of pose auto-encoders for camera pose regression.
+## Camera Pose Auto-Encoders for Improving Pose Regression (ECCV22)
+Official PyTorch implementation of pose auto-encoders for camera pose regression -  see our [paper](https://arxiv.org/abs/2207.05530) for more details. 
 
 ### Repository Overview 
 
@@ -63,6 +63,16 @@ You can download pretrained models in order to easily reproduce our results
 | Decoders for Image Reconstruction | |
 [Decoder for MS-Transformer](https://drive.google.com/file/d/1okm_sN_JXrSD2bpTHBYDghl99pIj87YX/view?usp=sharing) | Decoder trained for reconstructing images from the Shop Facade scene |
 
+ ### Citation 
+ If you find this repository useful, please consider giving a star and citation:
+```
+@article{ShavitandKeller22,
+  title={Camera Pose Auto-Encoders for Improving Pose Regression},
+  author={Shavit, Yoli and and Keller, Yosi},
+  journal={arXiv preprint arXiv:2207.05530},
+  year={2022}
+}
+  
 
 
 
