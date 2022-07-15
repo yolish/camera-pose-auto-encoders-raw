@@ -1,16 +1,28 @@
 # Test-time optimization of position estimation with pose encoding
-
-## Optimization of position for MS-Transformer with a camera pose encoding (Shop Facade scene)
+Optimization of position for MS-Transformer with a camera pose encoding (KingsCollege scene)
 ```
 main_refine_apr_test_time.py
 ems-transposenet
 models/backbones/efficient-net-b0.pth
 /mnt/data/CambridgeLandmarks/CAMBRIDGE_dataset/
-datasets/CambridgeLandmarks/abs_cambridge_pose_sorted.csv_ShopFacade_test.csv
+datasets/CambridgeLandmarks/abs_cambridge_pose_sorted.csv_KingsCollege_test.csv
 CambridgeLandmarks_config.json
 pretrained_models/ems_transposenet_cambridge_pretrained_finetuned.pth
 pretrained_models/mstransformer_cambridge_pose_encoder.pth
-datasets/CambridgeLandmarks/abs_cambridge_pose_sorted.csv_ShopFacade_train.csv
+datasets/CambridgeLandmarks/abs_cambridge_pose_sorted.csv_KingsCollege_train.csv
+```
+
+Optimization of position for MS-Transformer with a camera pose encoding (Fire scene)
+```
+main_refine_apr_test_time.py
+ems-transposenet
+models/backbones/efficient-net-b0.pth
+/data/Datasets/7Scenes/
+datasets/7Scenes/abs_7scenes_pose.csv_fire_test.csv
+7Scenes_config.json
+pretrained_models/ems_transposenet_7scenes_pretrained.pth
+pretrained_models/mstransformer_7scenes_pose_encoder.pth
+datasets/7Scenes/abs_7scenes_pose.csv_fire_train.csv
 ```
 
 ## Optimization of position for PoseNet with a MobileNet backbone with a camera pose encoding (Kings College scene)
