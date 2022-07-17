@@ -1,4 +1,4 @@
-## Camera Pose Auto-Encoders for Improving Pose Regression (ECCV22)
+## Camera Pose Auto-Encoders for Improving Pose Regression (Accepted to ECCV22)
 Official PyTorch implementation of pose auto-encoders for camera pose regression -  see our [paper](https://arxiv.org/abs/2207.05530) for more details. 
 
 ### Repository Overview 
