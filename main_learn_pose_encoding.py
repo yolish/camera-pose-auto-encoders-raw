@@ -1,5 +1,5 @@
 """
-Entry point training and testing multi-scene transformer
+Entry point for training and testing PAEs
 """
 import argparse
 import torch
