@@ -1,6 +1,3 @@
-"""
-Entry point training and testing multi-scene transformer
-"""
 import argparse
 import torch
 import numpy as np
