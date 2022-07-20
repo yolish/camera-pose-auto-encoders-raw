@@ -34,7 +34,7 @@
 		"num_neighbors": 3,
 		"test_optim_iterations": 3,
 		"img_size": 64,
-		"refine_orientation": "affine"
+		"refine_orientation": null
 
 	}
 
