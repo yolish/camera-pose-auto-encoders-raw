@@ -33,11 +33,6 @@ The entry point for training and testing camera pose auto-encoders are the ```ma
 
 See example_cmd\example_cmd_train_test_pose_auto_encoders.md for example command lines.
 
-#### Test-time optimization for position regression with camera pose encoding
-The entry point for test time optimization is the ```main_refine_apr_test_time.py``` script.
-
-See ```example_cmd\example_cmd_test_time_optim.md``` for example command lines.
-
 #### Image reconstructiom from camera pose encoding
 The entry training and testing an image decoder to reconstruct images from camera pose encoding, is the ```main_reconstruct_img.py``` script.
 
